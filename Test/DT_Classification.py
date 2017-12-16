@@ -22,3 +22,4 @@ dot_data = tree.export_graphviz(clf, out_file=None,
                          special_characters=True)
 graph = graphviz.Source(dot_data)
 graph
+clf.predict(iris.data[:1, :])
