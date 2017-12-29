@@ -14,7 +14,7 @@ kf = KFold(n_splits=3)
 kf.get_n_splits(X)
 
 print(kf)
-
+####
 for train_index, test_index in kf.split(X):
    print("TRAIN:", train_index, "TEST:", test_index)
    X_train, X_test = X[train_index], X[test_index]
