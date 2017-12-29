@@ -1,29 +1,35 @@
 from sklearn import tree
 import graphviz
 import pandas as pd
-from sklearn.model_selection import KFold,cross_val_predict
-from sklearn import svm, tree, neighbors, neural_network, naive_bayes
+import numpy as np
+from sklearn.model_selection import cross_val_predict,GridSearchCV,RandomizedSearchCV
+from sklearn import  neighbors
 import sklearn.metrics as met
 import matplotlib.pyplot as plt
+import time
 
-
-data=pd.read_csv('DataSets/tae.csv',sep=',',header=None)
-#print(data)
+#Insert data set
+data=pd.read_csv('../Test/DataSets/tae.csv',sep=',',header=None)
 train=data.ix[:,0:4]
 target=data.ix[:,5]
-#print(x)
-#print(target)
 
-kf=KFold(n_splits=10)
-print(kf)
-print(kf.get_n_splits(train))
-for train_index, test_index in kf.split(train):
-   print("TRAIN:", train_index, "TEST:", test_index)
-   X_train, X_test = train.ix[train_index,:], train.ix[test_index,:]
-   print(X_train)
-   y_train, y_test = target[train_index], target[test_index]
-   print(y_train)
-for i in range(5, 40):
+# construct the set of hyperparameters to tune
+params = {"n_neighbors": np.arange(3, 31, 2),"metric": ["euclidean", "cityblock"]}
+
+# tune the hyperparameters via a cross-validated grid search
+print("[INFO] tuning hyperparameters via grid search")
+model = neighbors.KNeighborsClassifier()
+grid = GridSearchCV(model, params)
+start = time.time()
+grid.fit(train, target)
+
+# evaluate the best grid searched model on the testing data
+print("[INFO] grid search took {:.2f} seconds".format( time.time() - start))
+acc = grid.score(train, target)
+print("[INFO] grid search accuracy: {:.2f}%".format(acc * 100))
+print("[INFO] grid search best parameters: {}".format( grid.best_params_))
+
+"""for i in range(5, 40):
     clf = neighbors.KNeighborsClassifier(n_neighbors=i)
     print('--------------------{}---------------------------------'.format(i))
     print('cross_val_predict')
@@ -44,7 +50,7 @@ for i in range(5, 40):
     ax.plot([target.min(), target.max()], [target.min(), target.max()], 'k--', lw=4)
     ax.set_xlabel('Measured k {}'.format(i))
     ax.set_ylabel('Predicted')
-    plt.show()
+    plt.show()"""
 
 """for i in range(5,12):
     clf = tree.DecisionTreeClassifier(max_depth=i)
