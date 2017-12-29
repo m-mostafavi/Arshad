@@ -23,8 +23,8 @@ for train_index, test_index in kf.split(train):
    print(X_train)
    y_train, y_test = target[train_index], target[test_index]
    print(y_train)
-for i in range(5, 40):
-    clf = neighbors.KNeighborsClassifier(n_neighbors=i)
+for i in range(5, 12):
+    clf = tree.DecisionTreeClassifier(max_depth=i)
     print('--------------------{}---------------------------------'.format(i))
     print('cross_val_predict')
     predicted = cross_val_predict(clf, train, target, cv=10, )  # predict y values for the test fold
