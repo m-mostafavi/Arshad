@@ -43,7 +43,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4],
                      'C': [1, 10, 100, 1000]},
                     {'kernel': ['linear'], 'C': [1, 10, 100, 1000]}]
-
+sfd
 scores = ['precision', 'recall']
 
 for score in scores:
