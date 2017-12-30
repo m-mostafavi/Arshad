@@ -6,7 +6,7 @@ from sklearn import  neighbors
 import time
 
 #Insert data set
-data=pd.read_csv('../Test/DataSets/tae.csv',sep=',',header=None)
+data=pd.read_csv('tae.csv',sep=',',header=None)
 train=data.ix[:,0:4]
 target=data.ix[:,5]
 

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from matplotlib import gridspec
 from sklearn.model_selection import cross_val_predict
-from sklearn import  tree
+from sklearn import  linear_model
 import sklearn.metrics as met
 import matplotlib.pyplot as plt
 
@@ -17,10 +17,10 @@ precision=[]
 accuracy=[]
 f1score=[]
 
-dt_criterion =["gini", "entropy"]
-
-for i in np.arange(5, 20):
-    clf = tree.DecisionTreeClassifier(max_depth=i,criterion='entropy')
+#method : SVC , LinerSVC
+for i in np.arange(0.1, 4,0.2):
+    clf = linear_model.LogisticRegression(C=i)
+    print(clf)
     print('--------------------{}---------------------------------'.format(i))
     print('cross_val_predict')
     predicted = cross_val_predict(clf, train, target, cv=10, )  # predict y values for the test fold
@@ -46,26 +46,27 @@ fig = plt.figure()
 ax1 = plt.subplot(gs[0,:-1])
 r = np.array(recall)
 ax1.plot(r[:,0],  r[:,1], 'ro')
-ax1.set_xlabel('measure depth')
+ax1.set_xlabel('C parametr')
 ax1.set_ylabel('recall')
 # ------------------------------------
 ax2 = plt.subplot(gs[0,-1:])
 p=np.array(precision)
 ax2.plot(p[:,0],  p[:,1], 'ro')
-ax2.set_xlabel('measure depth ')
+ax2.set_xlabel('C parametr ')
 ax2.set_ylabel('precision')
 # ------------------------------------
 ax3 = plt.subplot(gs[1,:])
 a=np.array(accuracy)
 ax3.plot(a[:,0],  a[:,1], 'ro')
-ax3.set_xlabel('measure depth ')
+ax3.set_xlabel('C parametr ')
 ax3.set_ylabel('accuracy')
 # ------------------------------------
 ax4 = plt.subplot(gs[2,:])
 f=np.array(f1score)
 ax4.plot(f[:,0],  f[:,1], 'ro')
-ax4.set_xlabel('measure depth ')
+ax4.set_xlabel('C parametr ')
 ax4.set_ylabel('f1score')
 #------------------------------------
 plt.show()
 print(max( f[:,1]))
+

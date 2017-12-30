@@ -6,12 +6,12 @@ from sklearn import  tree
 import time
 
 #Insert data set
-data=pd.read_csv('../Test/DataSets/tae.csv',sep=',',header=None)
+data=pd.read_csv('tae.csv',sep=',',header=None)
 train=data.ix[:,0:4]
 target=data.ix[:,5]
 
 # construct the set of hyperparameters to tune
-params = {"max_depth": np.arange(5, 40),"criterion": ["gini", "entropy"]}
+params = {"max_depth": np.arange(5, 20),"criterion": ["gini", "entropy"]}
 
 # tune the hyperparameters via a cross-validated grid search
 print("[INFO] tuning hyperparameters via grid search")
