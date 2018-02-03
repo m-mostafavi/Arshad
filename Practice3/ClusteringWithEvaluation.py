@@ -39,6 +39,7 @@ for i in np.arange(2, 10):
    #                                    int(max(y_pred) + 1))))
    # print(X[:, 1],X[:, 2])
     #plt.scatter(X[:, 1], X[:, 2], s=2, color=colors[y_pred])
+
     labels = clf.labels_
     #print(labels)
     silhouetteScoreValue.append(metrics.silhouette_score(X, labels, metric='euclidean'))
