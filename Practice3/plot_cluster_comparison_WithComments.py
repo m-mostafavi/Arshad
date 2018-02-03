@@ -66,7 +66,7 @@ np.random.seed(0)
 # of the algorithms, but not too big to avoid too long running times
 # ============
 #تعداد نمونه هایی که در دیتاست های بعدی استفاده می شود را برابر 1500 نمونه در نظر میگیرد
-n_samples = 1500
+n_samples = 100
 
 
 #یک دیتاست به شکل دایره دار درست می کند
