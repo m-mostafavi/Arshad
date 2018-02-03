@@ -23,6 +23,7 @@ FMIValue=[]
 homogeneityValue=[]
 completenessValue=[]
 v_measureValue=[]
+adjustValue=[]
 for i in np.arange(2, 10):
     clf =KMeans(n_clusters=i).fit(X)
     #print(clf)
@@ -47,6 +48,8 @@ for i in np.arange(2, 10):
     homogeneityValue.append(metrics.homogeneity_score(target,labels))
     completenessValue.append(metrics.completeness_score(target,labels))
     v_measureValue.append(metrics.v_measure_score(target,labels))
+    adjustValue.append(metrics.adjusted_rand_score(target, labels)
+    )
     #plot_num+=1
 #plt.subplot(2, 2, 1)
 plt.plot(np.arange(2,10),silhouetteScoreValue,marker='*', linestyle='-.',color='g',label='silhouette_score')
@@ -54,5 +57,7 @@ plt.plot(np.arange(2, 10),FMIValue,marker='o', linestyle='--',color='r',label='f
 plt.plot(np.arange(2, 10),homogeneityValue,marker='s', linestyle='-',color='c',label='homogeneity_score')
 plt.plot(np.arange(2, 10),completenessValue,marker='+', linestyle='-.',color='m',label='completeness_score')
 plt.plot(np.arange(2, 10),v_measureValue,marker='D', linestyle=':',color='k',label='v_measure_score')
+plt.plot(np.arange(2, 10),adjustValue,marker='*', linestyle='-.',color='y',label='adjusted_rand_score')
+plt.axis([1,10,0,0.6])
 plt.legend(loc='upper right')
 plt.show()
